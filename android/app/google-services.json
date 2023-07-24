@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "457882343915",
+    "project_id": "weighthere-fbcd7",
+    "storage_bucket": "weighthere-fbcd7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:457882343915:android:9a4c4e80bb33a1993061ae",
+        "android_client_info": {
+          "package_name": "com.jj.weight_here"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "457882343915-kguuql3nq6pa7iaqquvdo5p487gp3i51.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTV0rXPuL2riNWpEgI_2-OXyu3_evZI0A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "457882343915-kguuql3nq6pa7iaqquvdo5p487gp3i51.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

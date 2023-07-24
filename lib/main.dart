@@ -1,6 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:weight_here/services/startup/startup_service.dart';
 
-void main() {
+
+void main() async {
+  // Initialise startup.
+  StartupService.instance;
+  
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
