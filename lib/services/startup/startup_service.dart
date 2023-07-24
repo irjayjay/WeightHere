@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:weight_here/services/startup/firebase_service.dart';
+import 'package:weight_here/services/startup/firebase/firebase_service.dart';
 
 class StartupService {
   StartupService._();
@@ -21,7 +21,7 @@ class StartupService {
     }
   }
 
-  List<StartupComponent> _startupComponents = [FirebaseService()];
+  final List<StartupComponent> _startupComponents = [FirebaseService()];
 }
 
 abstract class StartupComponent {
