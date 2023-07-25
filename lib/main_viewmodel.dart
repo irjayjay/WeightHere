@@ -9,7 +9,6 @@ class MainViewModel {
   MainViewModel(this._authRepository);
 
   Widget get initialHomeWidget {
-    // TODO(JJ): fix:
     if (_authRepository.isAuthorized) {
       return const HomeScreen();
     }
