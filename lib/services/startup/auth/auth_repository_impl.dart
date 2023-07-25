@@ -6,6 +6,9 @@ class AuthRepositoryImpl implements AuthRepository {
   bool get isAuthorized => FirebaseAuth.instance.currentUser != null;
 
   @override
+  String? get userId => FirebaseAuth.instance.currentUser?.uid;
+
+  @override
   Future<void> register({
     required String email,
     required String password,
@@ -14,6 +17,7 @@ class AuthRepositoryImpl implements AuthRepository {
       email: email,
       password: password,
     );
+    // TODO(JJ): Handle error states.
   }
 
   @override
@@ -24,6 +28,16 @@ class AuthRepositoryImpl implements AuthRepository {
     await FirebaseAuth.instance.signInWithEmailAndPassword(
       email: email,
       password: password,
+    );
+    // TODO(JJ): Handle error states.
+  }
+
+  @override
+  Future<bool> signOut() {
+    return FirebaseAuth.instance.signOut().then(
+      (value) {
+        return !isAuthorized;
+      },
     );
   }
 }

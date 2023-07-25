@@ -1,14 +1,17 @@
 import 'package:weight_here/services/startup/auth/auth_repository.dart';
 
+// TODO(JJ): Do I need this?
 class AuthService {
-  final AuthRepository authRepository;
-  AuthService(this.authRepository);
+  final AuthRepository _authRepository;
+  AuthService(this._authRepository);
+
+  bool get isAuthorized => _authRepository.isAuthorized;
 
   Future signIn({
     required String email,
     required String password,
   }) =>
-      authRepository.signIn(
+      _authRepository.signIn(
         email: email,
         password: password,
       );
@@ -17,5 +20,5 @@ class AuthService {
     required String email,
     required String password,
   }) =>
-      authRepository.signIn(email: email, password: password);
+      _authRepository.signIn(email: email, password: password);
 }
