@@ -8,12 +8,13 @@ class NavigationService {
 
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  void pop() => navigatorKey.currentState?.pop();
+  static void pop() => instance.navigatorKey.currentState?.pop();
 
-  Future<T?>? pushReplacement<T extends Object?, TO extends Object?>(
+  static Future<T?>? pushReplacement<T extends Object?, TO extends Object?>(
     Route<T> route, {
     TO? result,
   }) {
-    return navigatorKey.currentState?.pushReplacement(route, result: result);
+    return instance.navigatorKey.currentState
+        ?.pushReplacement(route, result: result);
   }
 }

@@ -45,7 +45,7 @@ class WeightsListViewModel {
           context: context,
           builder: (context) {
             return EditWeightModal(onTapAccept: (weight) {
-              if (context.mounted) NavigationService.instance.pop();
+              if (context.mounted) NavigationService.pop();
               if (weight != null) {
                 _saveEdit(
                   id: id,
@@ -53,7 +53,7 @@ class WeightsListViewModel {
                 ).leftElseRight(context);
               }
             }, onTapCancel: () {
-              if (context.mounted) NavigationService.instance.pop();
+              if (context.mounted) NavigationService.pop();
             });
           });
     }
@@ -88,14 +88,14 @@ class WeightsListViewModel {
               titleButton1: "yes",
               onPressedButton1: () async {
                 if (context.mounted) {
-                  NavigationService.instance.pop();
+                  NavigationService.pop();
                 }
                 _delete(id: weight.id).leftElseRight(context);
               },
               titleButton2: "no",
               onPressedButton2: () {
                 if (context.mounted) {
-                  NavigationService.instance.pop();
+                  NavigationService.pop();
                 }
               },
             );

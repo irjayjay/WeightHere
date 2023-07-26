@@ -21,12 +21,12 @@ class AddWeightButtonViewModel {
                 _weightRepository.create(weight).leftElseRight(context);
               }
               if (context.mounted) {
-                NavigationService.instance.pop();
+                NavigationService.pop();
               }
             },
             onTapCancel: () {
               if (context.mounted) {
-                NavigationService.instance.pop();
+                NavigationService.pop();
               }
             },
           );

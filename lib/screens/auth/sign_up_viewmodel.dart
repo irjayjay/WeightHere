@@ -13,7 +13,7 @@ class SignUpViewModel {
   }) async {
     await authRepository.register(email: email, password: password);
     if (authRepository.isAuthorized) {
-      NavigationService.instance.pushReplacement(
+      NavigationService.pushReplacement(
         MaterialPageRoute(builder: (context) => const HomeScreen()),
       );
     }
@@ -25,7 +25,7 @@ class SignUpViewModel {
   }) async {
     await authRepository.signIn(email: email, password: password);
     if (authRepository.isAuthorized) {
-      NavigationService.instance.pushReplacement(
+      NavigationService.pushReplacement(
         MaterialPageRoute(builder: (context) => const HomeScreen()),
       );
     }

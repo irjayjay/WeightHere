@@ -11,7 +11,7 @@ class HomeViewModel {
   void signOut() {
     _authRepository.signOut().then((success) {
       if (success) {
-        NavigationService.instance.pushReplacement(
+        NavigationService.pushReplacement(
           MaterialPageRoute(builder: (context) => const SignUpScreen()),
         );
       }
