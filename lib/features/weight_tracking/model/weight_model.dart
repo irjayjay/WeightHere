@@ -1,6 +1,6 @@
 import 'package:weight_here/features/weight_tracking/entity/weight.dart';
 
-/// Only serves to deserialize raw data.
+/// Serves to deserialize raw data in repositories.
 class WeightModel extends Weight {
   WeightModel({
     String id = '',

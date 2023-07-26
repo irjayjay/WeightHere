@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:weight_here/features/weight_tracking/repository/weight_repository.dart';
 import 'package:weight_here/features/weight_tracking/widgets/modals/edit_weight_modal/edit_weight_modal.dart';
 
+/// All presentation logic for AddWeightButton
 class AddWeightButtonViewModel {
   final WeightRepository _weightRepository;
+
   AddWeightButtonViewModel(this._weightRepository);
 
   Future<void> showAddModal({required BuildContext context}) async {

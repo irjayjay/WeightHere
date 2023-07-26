@@ -43,6 +43,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
         TextFormField(
           keyboardType: TextInputType.emailAddress,
           decoration: const InputDecoration(labelText: 'email'),
+          autofocus: true,
           validator: (value) {
             if (value!.isEmpty) {
               return 'Please enter your email';

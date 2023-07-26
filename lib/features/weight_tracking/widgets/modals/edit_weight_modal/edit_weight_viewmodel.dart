@@ -1,7 +1,16 @@
+/// Presentation logic for [EditWeightModal].
 class EditWeightViewModel {
+  final Function onTapAccept;
+  final Function onTapCancel;
+
+  EditWeightViewModel(this.onTapAccept, this.onTapCancel);
+
+  void accept() => onTapAccept(weight);
+
+  void cancel() => onTapCancel;
+
   double? _weight;
   double? get weight => _weight;
-
   double? setWeight(String value) {
     // TODO(JJ): Add validation and exception handling.
     if (value.isEmpty) {

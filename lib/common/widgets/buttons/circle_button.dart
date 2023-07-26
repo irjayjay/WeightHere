@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:weight_here/const/colors.dart';
 
-class CircularButtonWidget extends StatelessWidget {
-  const CircularButtonWidget({
+/// Most projects has a circle button somewhere.
+class CircleButtonWidget extends StatelessWidget {
+  final void Function()? onPressed;
+  final Widget? child;
+  final Color color;
+  final Color textColor;
+  final Size size;
+
+  const CircleButtonWidget({
     this.onPressed,
     this.child,
     this.color = ProjectColors.buttonPrimary,
@@ -10,12 +17,6 @@ class CircularButtonWidget extends StatelessWidget {
     this.size = const Size(50, 50),
     super.key,
   });
-
-  final void Function()? onPressed;
-  final Widget? child;
-  final Color color;
-  final Color textColor;
-  final Size size;
 
   @override
   Widget build(BuildContext context) {

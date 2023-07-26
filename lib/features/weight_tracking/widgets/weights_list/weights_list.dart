@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:weight_here/features/weight_tracking/entity/weight.dart';
 import 'package:weight_here/features/weight_tracking/repository/weight_repository_impl.dart';
-import 'package:weight_here/features/weight_tracking/widgets/weights_list_viewmodel.dart';
-import 'package:weight_here/screens/home/widgets/list_item.dart';
+import 'package:weight_here/features/weight_tracking/widgets/weights_list/list_item.dart';
+import 'package:weight_here/features/weight_tracking/widgets/weights_list/weights_list_viewmodel.dart';
 import 'package:weight_here/services/firestore/firestore_service.dart';
 import 'package:weight_here/services/startup/auth/auth_repository_impl.dart';
 

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/foundation.dart';
 
 // TODO(JJ): Add error handling.
+/// Simplified wrapper for Firestore.
 class FirestoreService {
   final db = FirebaseFirestore.instance;
 

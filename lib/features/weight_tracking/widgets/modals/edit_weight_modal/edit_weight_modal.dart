@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:weight_here/common/widgets/layout/default_padding.dart';
 import 'package:weight_here/features/weight_tracking/widgets/modals/edit_weight_modal/edit_weight_viewmodel.dart';
 
+/// One modal used for creating and editing weights.
+/// [onTapAccept] and [onTapCancel] enable the parent widget to supply logic.
 class EditWeightModal extends StatefulWidget {
   const EditWeightModal({
     required this.onTapAccept,
@@ -17,7 +19,13 @@ class EditWeightModal extends StatefulWidget {
 }
 
 class _EditWeightModalState extends State<EditWeightModal> {
-  final _viewModel = EditWeightViewModel();
+  late final EditWeightViewModel _viewModel;
+
+  @override
+  void didChangeDependencies() {
+    _viewModel = EditWeightViewModel(widget.onTapAccept, widget.onTapCancel);
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +46,9 @@ class _EditWeightModalState extends State<EditWeightModal> {
               TextFormField(
                 decoration: const InputDecoration(labelText: 'weight'),
                 keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.done,
+                autofocus: true,
+                onFieldSubmitted: (value) => _viewModel.accept(),
                 validator: (value) {
                   if (value!.isEmpty) {
                     return 'Enter weight in kg';
@@ -53,16 +64,12 @@ class _EditWeightModalState extends State<EditWeightModal> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                    onPressed: () {
-                      widget.onTapCancel();
-                    },
+                    onPressed: () => widget.onTapCancel,
                     child: const Text("cancel"),
                   ),
                   const SizedBox(width: 16),
                   ElevatedButton(
-                    onPressed: () {
-                      widget.onTapAccept(_viewModel.weight);
-                    },
+                    onPressed: _viewModel.accept,
                     style: ButtonStyle(
                       elevation: MaterialStateProperty.all(2),
                       backgroundColor: MaterialStateProperty.all(Colors.cyan),

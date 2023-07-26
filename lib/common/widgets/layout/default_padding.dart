@@ -1,7 +1,9 @@
 import 'package:flutter/widgets.dart';
 
+/// Convenience widget to quickly add padding to the UI.
 class DefaultPadding extends StatelessWidget {
   final Widget child;
+
   const DefaultPadding({super.key, required this.child});
 
   @override

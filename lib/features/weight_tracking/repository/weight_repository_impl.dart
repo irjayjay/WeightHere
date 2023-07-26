@@ -4,6 +4,7 @@ import 'package:weight_here/features/weight_tracking/repository/weight_repositor
 import 'package:weight_here/services/firestore/firestore_service.dart';
 import 'package:weight_here/services/startup/auth/auth_repository.dart';
 
+/// Firestore implementation for WeightRepository.
 class WeightRepositoryImpl extends WeightRepository {
   final FirestoreService _firestoreService;
   final AuthRepository _authRepository;

@@ -4,8 +4,10 @@ import 'package:weight_here/features/weight_tracking/entity/weight.dart';
 import 'package:weight_here/features/weight_tracking/repository/weight_repository.dart';
 import 'package:weight_here/features/weight_tracking/widgets/modals/edit_weight_modal/edit_weight_modal.dart';
 
+/// Presentation and business logic for [WeightsList].
 class WeightsListViewModel {
   final WeightRepository _repository;
+
   WeightsListViewModel(this._repository) {
     weights.listen((event) {
       _currentWeights = event;
@@ -13,7 +15,13 @@ class WeightsListViewModel {
   }
 
   late final Stream<List<Weight>> weights = _repository.weights;
+
   List<Weight> _currentWeights = [];
+
+  /// For conveniently getting the Weight data while editing.
+  Weight _getWeightById(String id) {
+    return _currentWeights.firstWhere((weight) => weight.id == id);
+  }
 
   /// Open the edit modal.
   Future<void> startEdit({required String id, required BuildContext context}) {
@@ -32,10 +40,6 @@ class WeightsListViewModel {
           });
     }
     return Future.value();
-  }
-
-  Weight _getWeightById(String id) {
-    return _currentWeights.firstWhere((weight) => weight.id == id);
   }
 
   /// Save to datastore, close modal and update list.

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weight_here/const/colors.dart';
 import 'package:weight_here/main_viewmodel.dart';
 import 'package:weight_here/services/startup/auth/auth_repository_impl.dart';
 import 'package:weight_here/services/startup/startup_service.dart';
@@ -22,6 +23,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
         useMaterial3: true,
+        textTheme: ThemeData.light().textTheme.apply(
+              bodyColor: ProjectColors.text,
+              displayColor: ProjectColors.text,
+            ),
       ),
       home: _viewModel.initialHomeWidget,
     );

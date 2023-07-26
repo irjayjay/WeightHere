@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weight_here/const/colors.dart';
 import 'package:weight_here/features/weight_tracking/widgets/add_button/add_button.dart';
-import 'package:weight_here/features/weight_tracking/widgets/weights_list.dart';
+import 'package:weight_here/features/weight_tracking/widgets/weights_list/weights_list.dart';
 import 'package:weight_here/screens/home/home_viewmodel.dart';
 import 'package:weight_here/services/startup/auth/auth_repository_impl.dart';
 

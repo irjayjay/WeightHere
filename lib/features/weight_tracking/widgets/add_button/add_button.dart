@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:weight_here/common/widgets/buttons/circular_button.dart';
+import 'package:weight_here/common/widgets/buttons/circle_button.dart';
 import 'package:weight_here/features/weight_tracking/repository/weight_repository_impl.dart';
 import 'package:weight_here/features/weight_tracking/widgets/add_button/add_button_viewmodel.dart';
 import 'package:weight_here/services/firestore/firestore_service.dart';
 import 'package:weight_here/services/startup/auth/auth_repository_impl.dart';
 
+/// Circle button with (+) icon, used on home screen.
 class AddWeightButton extends StatefulWidget {
   const AddWeightButton({super.key});
 
@@ -22,7 +23,7 @@ class _AddWeightButtonState extends State<AddWeightButton> {
 
   @override
   Widget build(BuildContext context) {
-    return CircularButtonWidget(
+    return CircleButtonWidget(
       onPressed: () {
         _viewModel.showAddModal(context: context);
       },

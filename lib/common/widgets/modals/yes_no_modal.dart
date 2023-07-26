@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:weight_here/common/widgets/layout/default_padding.dart';
 
+/// Generic modal that can be customised to fit most yes/no prompts.
 class YesNoModal extends StatelessWidget {
+  final String title;
+  final String titleButton1;
+  final Function onPressedButton1;
+  final String titleButton2;
+  final Function onPressedButton2;
+
   const YesNoModal({
     required this.title,
     required this.titleButton1,
@@ -10,12 +17,6 @@ class YesNoModal extends StatelessWidget {
     required this.onPressedButton2,
     super.key,
   });
-
-  final String title;
-  final String titleButton1;
-  final Function onPressedButton1;
-  final String titleButton2;
-  final Function onPressedButton2;
 
   @override
   Widget build(BuildContext context) {
