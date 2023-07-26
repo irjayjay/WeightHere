@@ -68,4 +68,10 @@ class _WeightsListWidgetState extends State<WeightsListWidget> {
       },
     );
   }
+
+  @override
+  void dispose() {
+    _viewModel.dispose();
+    super.dispose();
+  }
 }

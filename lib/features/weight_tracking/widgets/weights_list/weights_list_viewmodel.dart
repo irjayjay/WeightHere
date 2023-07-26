@@ -1,4 +1,8 @@
+import 'dart:async';
+
+import 'package:either_dart/either.dart';
 import 'package:flutter/material.dart';
+import 'package:weight_here/common/errors/errors.dart';
 import 'package:weight_here/common/widgets/modals/yes_no_modal.dart';
 import 'package:weight_here/features/weight_tracking/entity/weight.dart';
 import 'package:weight_here/features/weight_tracking/repository/weight_repository.dart';
@@ -8,13 +12,23 @@ import 'package:weight_here/features/weight_tracking/widgets/modals/edit_weight_
 class WeightsListViewModel {
   final WeightRepository _repository;
 
+  StreamSubscription? _streamSubscription;
+  final _weightStreamController = StreamController<List<Weight>>();
+
   WeightsListViewModel(this._repository) {
-    weights.listen((event) {
-      _currentWeights = event;
+    _streamSubscription = _repository.weights.listen((event) {
+      event.either(
+        (left) => null,
+        (right) {
+          _currentWeights = right;
+          _weightStreamController.add(right);
+        },
+      );
     });
   }
 
-  late final Stream<List<Weight>> weights = _repository.weights;
+  late final Stream<List<Weight>> weights =
+      _weightStreamController.stream.asBroadcastStream();
 
   List<Weight> _currentWeights = [];
 
@@ -32,7 +46,10 @@ class WeightsListViewModel {
             return EditWeightModal(onTapAccept: (weight) {
               if (context.mounted) Navigator.pop(context);
               if (weight != null) {
-                _saveEdit(id: id, weight: weight);
+                _saveEdit(
+                  id: id,
+                  weight: weight,
+                ).leftElseRight(context);
               }
             }, onTapCancel: () {
               if (context.mounted) Navigator.pop(context);
@@ -43,7 +60,7 @@ class WeightsListViewModel {
   }
 
   /// Save to datastore, close modal and update list.
-  Future<void> _saveEdit({
+  Future<Either<AppError, void>> _saveEdit({
     required String id,
     required double weight,
   }) {
@@ -72,7 +89,7 @@ class WeightsListViewModel {
                 if (context.mounted) {
                   Navigator.pop(context);
                 }
-                _delete(id: weight.id);
+                _delete(id: weight.id).leftElseRight(context);
               },
               titleButton2: "no",
               onPressedButton2: () {
@@ -86,7 +103,11 @@ class WeightsListViewModel {
   }
 
   /// Delete and update data store.
-  Future<void> _delete({required String id}) {
+  Future<Either<AppError, void>> _delete({required String id}) {
     return _repository.delete(id: id);
+  }
+
+  dispose() {
+    _streamSubscription?.cancel();
   }
 }

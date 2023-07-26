@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weight_here/common/errors/errors.dart';
 import 'package:weight_here/features/weight_tracking/repository/weight_repository.dart';
 import 'package:weight_here/features/weight_tracking/widgets/modals/edit_weight_modal/edit_weight_modal.dart';
 
@@ -16,7 +17,7 @@ class AddWeightButtonViewModel {
           return EditWeightModal(
             onTapAccept: (weight) {
               if (weight != null) {
-                _weightRepository.create(weight);
+                _weightRepository.create(weight).leftElseRight(context);
               }
               if (context.mounted) {
                 Navigator.of(context).pop();

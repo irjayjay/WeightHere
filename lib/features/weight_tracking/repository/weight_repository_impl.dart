@@ -1,3 +1,5 @@
+import 'package:either_dart/either.dart';
+import 'package:weight_here/common/errors/errors.dart';
 import 'package:weight_here/features/weight_tracking/entity/weight.dart';
 import 'package:weight_here/features/weight_tracking/model/weight_model.dart';
 import 'package:weight_here/features/weight_tracking/repository/weight_repository.dart';
@@ -20,15 +22,27 @@ class WeightRepositoryImpl extends WeightRepository {
   }
 
   @override
-  Future<void> create(double weight) {
-    return _firestoreService.createDoc(
+  Future<Either<AppError, void>> create(double weight) {
+    return _firestoreService
+        .createDoc(
       rootPath,
       WeightModel(weight: weight, date: DateTime.now()).toJson(),
+    )
+        .then(
+      (value) {
+        return Right(value);
+      },
+      onError: (e) {
+        return Left(AppError(
+          error: ErrorTypes.CreateImpossible,
+          message: "Could not save weight.",
+        ));
+      },
     );
   }
 
   @override
-  Stream<List<Weight>> get weights {
+  Stream<Either<AppError, List<Weight>>> get weights {
     return _firestoreService.snapshotStream(rootPath).map(
       (snapshot) {
         final docs = snapshot;
@@ -38,19 +52,44 @@ class WeightRepositoryImpl extends WeightRepository {
           json['id'] = doc.id;
           mapped.add(WeightModel.fromJson(json));
         }
-        return mapped;
+        return Right<AppError, List<Weight>>(mapped);
       },
-    ).asBroadcastStream();
+    ).handleError((e) {
+      return Left(AppError(
+        error: ErrorTypes.NotFound,
+        message: "Could not fetch weights.",
+      ));
+    }).asBroadcastStream();
   }
 
   @override
-  Future<void> edit({required String id, required Weight weight}) {
-    return _firestoreService.updateDoc(
-        rootPath, id, WeightModel.fromWeight(weight).toJson());
+  Future<Either<AppError, void>> edit({
+    required String id,
+    required Weight weight,
+  }) {
+    return _firestoreService
+        .updateDoc(rootPath, id, WeightModel.fromWeight(weight).toJson())
+        .then<Either<AppError, void>>((value) {
+      return Right(value);
+    }).onError((error, stackTrace) {
+      return Left(AppError(
+        error: ErrorTypes.UpdateImpossible,
+        message: "Could not update weight.",
+      ));
+    });
   }
 
   @override
-  Future<void> delete({required String id}) {
-    return _firestoreService.deleteDoc(id, rootPath);
+  Future<Either<AppError, void>> delete({required String id}) {
+    return _firestoreService
+        .deleteDoc(id, rootPath)
+        .then<Either<AppError, void>>((value) {
+      return Right(value);
+    }).onError((error, stackTrace) {
+      return Left(AppError(
+        error: ErrorTypes.DeleteImpossible,
+        message: "Could not delete.",
+      ));
+    });
   }
 }
