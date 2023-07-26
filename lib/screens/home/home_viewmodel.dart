@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weight_here/screens/auth/sign_up_screen.dart';
+import 'package:weight_here/services/navigation/navigation_service.dart';
 import 'package:weight_here/services/startup/auth/auth_repository.dart';
 
 class HomeViewModel {
@@ -7,11 +8,10 @@ class HomeViewModel {
 
   HomeViewModel(this._authRepository);
 
-  void signOut(BuildContext context) {
+  void signOut() {
     _authRepository.signOut().then((success) {
-      if (success && context.mounted) {
-        Navigator.pushReplacement(
-          context,
+      if (success) {
+        NavigationService.instance.pushReplacement(
           MaterialPageRoute(builder: (context) => const SignUpScreen()),
         );
       }

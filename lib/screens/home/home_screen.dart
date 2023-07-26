@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
             switch (id) {
               case 1:
               default:
-                _viewModel.signOut(context);
+                _viewModel.signOut();
                 break;
             }
           },

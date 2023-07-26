@@ -32,7 +32,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   buttonText: "Sign up",
                   submitCallback: (email, password) {
                     _viewModel.signUp(
-                      context: context,
                       email: email,
                       password: password,
                     );
@@ -40,7 +39,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   buttonText2: "Sign in",
                   submitCallback2: (email, password) {
                     _viewModel.signIn(
-                      context: context,
                       email: email,
                       password: password,
                     );

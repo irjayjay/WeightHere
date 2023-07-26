@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weight_here/const/colors.dart';
 import 'package:weight_here/main_viewmodel.dart';
+import 'package:weight_here/services/navigation/navigation_service.dart';
 import 'package:weight_here/services/startup/auth/auth_repository_impl.dart';
 import 'package:weight_here/services/startup/startup_service.dart';
 
@@ -20,6 +21,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      navigatorKey: NavigationService.instance.navigatorKey,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
         useMaterial3: true,

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weight_here/common/errors/errors.dart';
 import 'package:weight_here/features/weight_tracking/repository/weight_repository.dart';
 import 'package:weight_here/features/weight_tracking/widgets/modals/edit_weight_modal/edit_weight_modal.dart';
+import 'package:weight_here/services/navigation/navigation_service.dart';
 
 /// All presentation logic for AddWeightButton
 class AddWeightButtonViewModel {
@@ -20,12 +21,12 @@ class AddWeightButtonViewModel {
                 _weightRepository.create(weight).leftElseRight(context);
               }
               if (context.mounted) {
-                Navigator.of(context).pop();
+                NavigationService.instance.pop();
               }
             },
             onTapCancel: () {
               if (context.mounted) {
-                Navigator.of(context).pop();
+                NavigationService.instance.pop();
               }
             },
           );

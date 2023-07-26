@@ -21,7 +21,9 @@ class StartupService {
     }
   }
 
-  final List<StartupComponent> _startupComponents = [FirebaseService()];
+  final List<StartupComponent> _startupComponents = [
+    FirebaseService(),
+  ];
 }
 
 abstract class StartupComponent {

@@ -7,6 +7,7 @@ import 'package:weight_here/common/widgets/modals/yes_no_modal.dart';
 import 'package:weight_here/features/weight_tracking/entity/weight.dart';
 import 'package:weight_here/features/weight_tracking/repository/weight_repository.dart';
 import 'package:weight_here/features/weight_tracking/widgets/modals/edit_weight_modal/edit_weight_modal.dart';
+import 'package:weight_here/services/navigation/navigation_service.dart';
 
 /// Presentation and business logic for [WeightsList].
 class WeightsListViewModel {
@@ -44,7 +45,7 @@ class WeightsListViewModel {
           context: context,
           builder: (context) {
             return EditWeightModal(onTapAccept: (weight) {
-              if (context.mounted) Navigator.pop(context);
+              if (context.mounted) NavigationService.instance.pop();
               if (weight != null) {
                 _saveEdit(
                   id: id,
@@ -52,7 +53,7 @@ class WeightsListViewModel {
                 ).leftElseRight(context);
               }
             }, onTapCancel: () {
-              if (context.mounted) Navigator.pop(context);
+              if (context.mounted) NavigationService.instance.pop();
             });
           });
     }
@@ -87,14 +88,14 @@ class WeightsListViewModel {
               titleButton1: "yes",
               onPressedButton1: () async {
                 if (context.mounted) {
-                  Navigator.pop(context);
+                  NavigationService.instance.pop();
                 }
                 _delete(id: weight.id).leftElseRight(context);
               },
               titleButton2: "no",
               onPressedButton2: () {
                 if (context.mounted) {
-                  Navigator.pop(context);
+                  NavigationService.instance.pop();
                 }
               },
             );
